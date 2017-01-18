@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
 * Студент: [Юлия Рушай](https://up.htmlacademy.ru/javascript/8/user/144822).
-* Наставник: `Неизвестно`.
+* Наставник: `Варя Степанова`.
 
 ---
 
