@@ -6,7 +6,6 @@ body {
 
 html {
   min-height: 100%;
-
   background: #232321;
 }
 
@@ -16,10 +15,8 @@ html.inline-element {
 
 body {
   position: relative;
-
   min-width: 980px;
   min-height: 900px;
-
   font: 14px "Open Sans", Arial, sans-serif;
   color: #ffe753;
 }
@@ -34,17 +31,14 @@ body {
 
 .filters {
   padding: 15px 0;
-
   text-align: center;
 }
 
 .filters-item {
   padding: 0 16px;
-
   font-size: 18px;
   line-height: 30px;
   text-decoration: underline;
-
   cursor: pointer;
 }
 
@@ -57,7 +51,6 @@ body {
 .filters-radio:checked + .filters-item {
   color: #000000;
   text-decoration: none;
-
   background: #ffffff;
   border-radius: 2px;
 }
@@ -65,13 +58,11 @@ body {
 .upload {
   position: absolute;
   left: 50%;
-
   width: 582px;
   height: 569px;
   margin: 5px 0 0 -291px;
   margin-top: 5px;
   padding: 0;
-
   background: url("../img/logo-background-1.jpg") center;
   border: 0;
 }
@@ -81,12 +72,10 @@ body {
   top: 0;
   left: 0;
   z-index: 2;
-
   width: 100%;
   height: 100%;
   padding: 60px 0;
   box-sizing: border-box;
-
   background: rgba(0, 0, 0, 0.8);
   border: none;
   overflow: auto;
@@ -100,7 +89,6 @@ body {
 .upload-image {
   position: relative;
   z-index: 1;
-
   background: url("../img/logo-mask.png") no-repeat center;
 }
 
@@ -118,19 +106,31 @@ body {
 .upload-filter-label-chrome .upload-filter-preview,
 .filter-chrome {
   -webkit-filter: grayscale(1);
-          filter: grayscale(1);
+  filter: grayscale(1);
 }
 
 .upload-filter-label-sepia .upload-filter-preview,
 .filter-sepia {
   -webkit-filter: sepia(1);
-          filter: sepia(1);
+  filter: sepia(1);
 }
 
 .upload-filter-label-marvin .upload-filter-preview,
 .filter-marvin {
   -webkit-filter: invert(100%);
-          filter: invert(100%);
+  filter: invert(100%);
+}
+
+.upload-filter-label-heat .upload-filter-preview,
+.filter-heat {
+  -webkit-filter: brightness(1.4) blur(2px);
+  filter: brightness(1.4) blur(2px);
+}
+
+.upload-filter-label-phobos .upload-filter-preview,
+.filter-phobos {
+  -webkit-filter: hue-rotate(90deg);
+  filter: hue-rotate(90deg);
 }
 
 .upload-input {
@@ -141,13 +141,11 @@ body {
   position: absolute;
   top: 193px;
   left: 202px;
-
   box-sizing: border-box;
   width: 182px;
   height: 182px;
   margin: 0;
   padding: 0;
-
   background: url("../img/icon-photo.png") center no-repeat;
   border: none;
   cursor: pointer;
@@ -179,10 +177,8 @@ body {
   right: 0;
   left: 0;
   z-index: 0;
-
   margin: 0;
   padding: 10px;
-
   border: 0;
 }
 
@@ -191,15 +187,12 @@ body {
   width: 42px;
   height: 42px;
   padding: 0;
-
   position: absolute;
   top: 0;
   left: 100%;
   margin-left: 10px;
-
   border: 0;
   border-radius: 2px;
-
   background: rgba(255, 255, 255, 0.2) url("../img/icon-cross.png") center no-repeat;
 }
 
@@ -207,14 +200,15 @@ body {
   transform: translateY(1px);
 }
 
+
 /* Кадрирование */
+
 .upload-resize-controls {
   position: absolute;
   top: 0;
   left: 50%;
   z-index: 1;
   transform: translateX(-50%);
-
   border: 0;
 }
 
@@ -223,21 +217,17 @@ body {
   height: 33px;
   margin: 0;
   padding: 0;
-
   font: 700 20px/33px "Open Sans";
   color: #fff;
   text-align: center;
   vertical-align: top;
-
   background: rgba(0, 0, 0, 0.56);
   border: 0;
 }
 
 .upload-resize-controls-value {
   width: 60px;
-
   font-size: 16px;
-
   border: solid rgba(255, 255, 255, 0.5);
   border-width: 0 1px;
 }
@@ -248,7 +238,6 @@ body {
 
 .upload-resize-controls-button-dec {
   line-height: 20px;
-
   border-radius: 50% 0 0 50%;
 }
 
@@ -256,18 +245,18 @@ body {
   border-radius: 0 50% 50% 0;
 }
 
+
 /* Фильтры */
+
 .upload-filter-controls {
   width: 470px;
   margin: 10px auto 30px;
   padding: 0;
-
   font-size: 12px;
   line-height: 42px;
   text-align: center;
   color: #ffffff;
   white-space: nowrap;
-
   border: 0;
 }
 
@@ -281,19 +270,16 @@ body {
 
 .upload-filter-controls input[type=radio] {
   position: absolute;
-
   visibility: hidden;
 }
 
 .upload-filter-label {
   display: inline-block;
   margin: 0 5px;
-
   font: 14px "Open Sans Condensed";
   font-weight: 700;
   color: #ffffff;
   text-transform: uppercase;
-
   cursor: pointer;
 }
 
@@ -306,59 +292,53 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   border-color: #ffe753;
 }
 
+
 /* Превью */
+
 .upload-filter-preview {
   display: block;
   width: 70px;
   height: 70px;
-
   overflow: hidden;
   background-size: 100% auto;
   background-position: center;
   border: solid 4px transparent;
   border-radius: 5px;
-
   margin-bottom: 5px;
 }
 
+
 /* Слайдер. Регулировка глубины фильтра */
+
 .upload-filter-level {
   width: 495px;
   height: 33px;
-
   box-sizing: border-box;
-
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   bottom: 0;
-
   background: rgba(0, 0, 0, 0.6);
   border-radius: 33px;
 }
 
 .upload-filter-level-line {
   height: 5px;
-
   position: absolute;
   left: 20px;
   right: 20px;
   top: 50%;
   transform: translateY(-50%);
-
   background: rgba(255, 231, 81, 0.4);
 }
 
 .upload-filter-level-pin {
   width: 18px;
   height: 18px;
-
   position: absolute;
   left: 20%;
   top: 50%;
-
   margin: -9px 0 0;
-
   background: #ffe753;
   border-radius: 50%;
   transform: translateX(-50%);
@@ -368,24 +348,21 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 .upload-filter-level-val {
   width: 20%;
   height: 100%;
-
   position: absolute;
-
   background: #ffe753;
 }
 
+
 /* Описание */
+
 .upload-form-description {
   width: 470px;
   height: 4em;
-
   font: 14px "Open Sans";
   color: #9a9a9a;
-
   display: block;
   margin: 0 auto 30px;
   padding: 20px 10px;
-
   border-radius: 5px;
 }
 
@@ -393,20 +370,19 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   color: #000;
 }
 
+
 /* Кнопка отправки */
+
 .upload-form-submit {
   padding: 0 20px;
   margin-bottom: 30px;
-
   font: 14px "Open Sans";
   font-weight: 900;
   color: #ffe753;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-
   line-height: 46px;
   text-align: center;
-
   background: rgba(255, 231, 82, 0.2);
   border: 0;
   border-radius: 4px;
@@ -421,7 +397,9 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   opacity: 0.3;
 }
 
+
 /* Сообщение об ошибке */
+
 .upload-message {
   position: absolute;
   top: 0;
@@ -429,16 +407,13 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   bottom: 0;
   left: 0;
   z-index: 1;
-
   box-sizing: border-box;
   padding: 20px;
-
   font-weight: 500;
   font-size: 20px;
   line-height: 569px;
   text-align: center;
   color: #ffe753;
-
   background: #3c3614;
 }
 
@@ -448,7 +423,6 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 
 .upload-message-error {
   color: #e16567;
-
   border: solid 5px rgb(130, 30, 0);
 }
 
@@ -458,7 +432,6 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 
 .upload-message-container {
   display: inline-block;
-
   line-height: 1.2;
   vertical-align: middle;
 }
@@ -471,7 +444,6 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 .pictures {
   padding-bottom: 120px;
   padding-left: 12px;
-
   font-size: 0;
   text-align: left;
 }
@@ -482,16 +454,13 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   top: 260px;
   left: 50%;
   z-index: 2;
-
   box-sizing: border-box;
   width: 200px;
   margin-left: -100px;
   padding: 20px;
-
   font-size: 30px;
   text-align: center;
   color: #ffffff;
-
   background: rgba(0, 0, 0, 0.7);
   border-radius: 10px;
 }
@@ -506,7 +475,6 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 
 .picture {
   position: relative;
-
   display: inline-block;
   box-sizing: border-box;
   width: 182px;
@@ -514,14 +482,12 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   margin-right: 14px;
   margin-bottom: 14px;
   overflow: hidden;
-
   text-align: center;
 }
 
 .picture img {
   height: 182px;
   margin-bottom: -34px;
-
   border: 0;
 }
 
@@ -531,7 +497,6 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 
 .picture-load-failure {
   line-height: 182px;
-
   background: url("../img/icon-cross.png") no-repeat center;
   border: solid 1px rgba(255, 255, 255, 0.2);
   opacity: 0.3;
@@ -546,10 +511,8 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 .picture-stats {
   display: none;
   padding: 0 10px;
-
   line-height: 24px;
   color: #ffffff;
-
   background: rgba(0, 0, 0, 0.3);
   border-radius: 2px;
 }
@@ -561,16 +524,13 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 .picture-load-failure .picture-stats {
   position: relative;
   top: -12px;
-
   line-height: 1.3;
   vertical-align: bottom;
 }
 
 .picture-stat {
   position: relative;
-
   margin: 0 5px;
-
   font-weight: bold;
   font-size: 14px;
   vertical-align: middle;
@@ -580,26 +540,21 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   content: "";
   position: relative;
   top: -1px;
-
   display: inline-block;
   margin: 0 2px;
-
   vertical-align: middle;
-
   background: url("../img/image-icons-sprite.png") no-repeat 0 0;
 }
 
 .picture-comments:before {
   width: 20px;
   height: 16px;
-
   background-position: 0 0;
 }
 
 .picture-likes:before {
   width: 19px;
   height: 15px;
-
   background-position: -21px 0;
 }
 
@@ -607,11 +562,9 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   .container {
     width: 1380px;
   }
-
   .picture:nth-of-type(2n-1):nth-of-type(-n+6) {
     margin-right: 12px;
   }
-
   .picture:nth-of-type(2),
   .picture:nth-of-type(6),
   .picture:nth-of-type(10) {
@@ -626,11 +579,8 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   bottom: 0;
   left: 0;
   z-index: 1;
-
   overflow: auto;
-
   text-align: center;
-
   background: rgba(0, 0, 0, 0.8);
 }
 
@@ -638,20 +588,16 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   position: absolute;
   top: -5px;
   right: 0;
-
   padding: 0 10px;
-
   font-size: 45px;
   text-align: center;
   color: #ffffff;
-
   cursor: pointer;
 }
 
 .gallery-overlay-preview {
   display: inline-block;
   margin: 30px 0;
-
   background: #ffffff;
 }
 
@@ -659,7 +605,6 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   display: block;
   width: 640px;
   height: 640px;
-
   border: dotted 1px #dddddd;
   cursor: pointer;
 }
@@ -673,20 +618,17 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 .gallery-overlay-controls-comments,
 .gallery-overlay-controls-like {
   padding: 0 20px;
-
   line-height: 40px;
 }
 
 .gallery-overlay-controls-comments {
   margin-right: 150px;
-
   text-align: left;
 }
 
 .gallery-overlay-controls-like {
   float: right;
   width: 150px;
-
   text-align: right;
 }
 
@@ -696,14 +638,11 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 
 .likes-count:before {
   content: "";
-
   display: inline-block;
   width: 18px;
   height: 15px;
   margin-right: 5px;
-
   vertical-align: middle;
-
   background: url("../img/icon-heart-sprite.gif") no-repeat 0 0;
   cursor: pointer;
 }
@@ -717,15 +656,12 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   right: 10px;
   bottom: 0;
   left: 10px;
-
   box-sizing: border-box;
   height: 115px;
   padding: 20px 0 40px;
-
   font-size: 12px;
   font-family: Roboto, Arial, sans-serif;
   color: #ffffff;
-
   border-top: solid 1px #cccccc;
 }
 
@@ -746,7 +682,6 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 
 .footer-logo {
   position: relative;
-
   padding-top: 55px;
 }
 
@@ -770,12 +705,10 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
   height: 28px;
   margin-left: 10px;
   overflow: hidden;
-
   list-style: none;
   font-size: 0;
   vertical-align: top;
   text-indent: -1999em;
-
   background: url("../img/social-sprite.png") no-repeat;
   opacity: 0.6;
 }
@@ -783,8 +716,6 @@ input[type=radio]:checked + .upload-filter-label .upload-filter-preview {
 .footer-social-item:hover {
   opacity: 1;
 }
-
-
 
 .footer-social-item-instagram {
   background-position: -28px 0;
