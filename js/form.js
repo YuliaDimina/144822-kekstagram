@@ -87,3 +87,5 @@ uploadResizeIncBtn.addEventListener('click', function () {
   }
   imagePreviewZoomTransform();
 });
+
+// проверка eslint
