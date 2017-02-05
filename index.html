@@ -11,19 +11,19 @@
 <body>
 
   <form class="filters hidden" action="index.html" method="get" autocomplete="off">
-    <input type="radio" id="filter-popular" class="filters-radio" name="filter" value="popular" checked>
+    <input type="radio" id="filter-popular" class="filters-radio" name="filter" value="popular" checked role="radio">
     <label for="filter-popular" class="filters-item">Популярные</label>
 
-    <input type="radio" id="filter-new" class="filters-radio" name="filter" value="new">
+    <input type="radio" id="filter-new" class="filters-radio" name="filter" value="new" role="radio">
     <label for="filter-new" class="filters-item">Новые</label>
 
-    <input type="radio" id="filter-discussed" class="filters-radio" name="filter" value="discussed">
+    <input type="radio" id="filter-discussed" class="filters-radio" name="filter" value="discussed" role="radio">
     <label for="filter-discussed" class="filters-item">Обсуждаемые</label>
   </form>
 
   <div class="upload">
-    <form class="upload-form upload-image" id="upload-select-image" method="post" enctype="multipart/form-data">
-      <input type="file" id="upload-file" class="upload-input" name="filename" required>
+    <form class="upload-form upload-image" id="upload-select-image" method="post" enctype="multipart/form-data" role="main">
+      <input type="file" id="upload-file" class="upload-input" name="filename" required role="button" aria-pressed='false'>
       <label class="upload-file upload-control" for="upload-file"></label>
       <button class="upload-submit upload-control" type="submit"></button>
     </form>
@@ -31,18 +31,18 @@
     <div class="upload-overlay invisible" role="form" aria-hidden='true'>
       <form class="upload-form upload-filter" id="upload-filter" method="post" enctype="multipart/form-data">
         <fieldset class="upload-resize-controls">
-          <button type="button" class="upload-resize-control upload-resize-controls-button upload-resize-controls-button-dec">–</button>
+          <button type="button" class="upload-resize-control upload-resize-controls-button upload-resize-controls-button-dec" role="button">–</button>
           <!--
         -->
-          <input type="text" class="upload-resize-control upload-resize-controls-value" value="100" readonly />
+          <input type="text" class="upload-resize-control upload-resize-controls-value" value="100" readonly role="status" />
           <!--
         -->
-          <button type="button" class="upload-resize-control upload-resize-controls-button upload-resize-controls-button-inc">+</button>
+          <button type="button" class="upload-resize-control upload-resize-controls-button upload-resize-controls-button-inc" role="button">+</button>
         </fieldset>
 
         <div class="upload-form-preview">
           <div></div>
-          <img src="img/upload-default-image.png" class="filter-image-preview">
+          <img src="img/upload-default-image.png" class="filter-image-preview" role="img">
         </div>
 
         <fieldset class="upload-filter-controls">
@@ -90,10 +90,10 @@
           </label>
         </fieldset>
 
-        <textarea class="upload-form-description" name="upload-description" placeholder="Ваш комментарий..."></textarea>
+        <textarea class="upload-form-description" name="upload-description" placeholder="Ваш комментарий..." role="textbox"></textarea>
 
         <button class="upload-form-cancel" type="reset" id="upload-cancel" role="button" aria-pressed='false' tabindex="0"></button>
-        <button class="upload-form-submit" type="submit" id="upload-submit">Отправить</button>
+        <button class="upload-form-submit" type="submit" id="upload-submit" role="button" aria-pressed='false' tabindex="0">Отправить</button>
       </form>
     </div>
 
