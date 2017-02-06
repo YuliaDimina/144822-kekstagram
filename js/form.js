@@ -2,11 +2,11 @@
 // объявляем константы
 var BUTTON_KEY_CLOSE_BYENTER = 13;
 var BUTTON_KEY_CLOSE_BYESCAPE = 27;
-var changeAriaStatus = function (param1, param2) {
-  if (param1.getAttribute(param2, false)) {
-    param1.setAttribute(param2, true);
+var changeAriaStatus = function (element, aria) {
+  if (element.getAttribute(aria, false)) {
+    element.setAttribute(aria, true);
   } else {
-    param1.setAttribute(param2, false);
+    element.setAttribute(aria, false);
   }
 };
 // определяем контейнер формы загрузки
