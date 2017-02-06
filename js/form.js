@@ -2,6 +2,13 @@
 // объявляем константы
 var BUTTON_KEY_CLOSE_BYENTER = 13;
 var BUTTON_KEY_CLOSE_BYESCAPE = 27;
+var changeAriaStatus = function (param1, param2) {
+  if (param1.getAttribute(param2, false)) {
+    param1.setAttribute(param2, true);
+  } else {
+    param1.setAttribute(param2, false);
+  }
+};
 // определяем контейнер формы загрузки
 var uploadBox = document.querySelector('.upload-overlay');
 // определяем контейнер, содержащий все фильстры
@@ -11,23 +18,11 @@ var filterForm = document.forms['upload-filter'];
 // определяем кнопку закрытия контейнера с формой загрузки картинки
 var uploadFormClose = filterForm.querySelector('.upload-form-cancel');
 // задаем функцию смены атрибута aria- кнопке закрытия формы
-var uploadFormCloseAriastatus = function () {
-  if (uploadFormClose.getAttribute('aria-pressed', false)) {
-    uploadFormClose.setAttribute('aria-pressed', true);
-  } else {
-    uploadFormClose.setAttribute('aria-pressed', false);
-  }
-};
+var uploadFormCloseAriastatus = changeAriaStatus(uploadFormClose, 'aria-pressed');
 // Опередялем кнопку сохранения загруженной картинки с примененными фильтрами
 var uploadFormSubmit = document.querySelector('.upload-form-submit');
 // задаем функцию смены атрибута aria- в кнопке сохранения картинки
-var uploadFormSubmitAriastatus = function () {
-  if (uploadFormSubmit.getAttribute('aria-pressed', false)) {
-    uploadFormSubmit.setAttribute('aria-pressed', true);
-  } else {
-    uploadFormSubmit.setAttribute('aria-pressed', false);
-  }
-};
+var uploadFormSubmitAriastatus = changeAriaStatus(uploadFormSubmit, 'aria-pressed');
 // определяем кнопку загрузки картинки (инпут, в который добавляется файл картинки)
 var uploadImageBtn = document.querySelector('.upload-input');
 // задаем функцию показа контейнера с формой
