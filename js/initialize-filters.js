@@ -12,24 +12,15 @@ window.initializeFilters = function () {
   var filtersContainer = document.querySelector('.upload-filter-controls');
   var filterForm = document.forms['upload-filter'];
   var imagePreview = filterForm.querySelector('.filter-image-preview');
-  filtersContainer.addEventListener('change', listenFilterChange);
-
-  function getCurrentFilterName() {
-    return [].filter.call(filterForm, function (item) {
+  filtersContainer.addEventListener('change', function () {
+    var selectedFilter = [].filter.call(filterForm, function (item) {
       return item.checked;
     })[0].value;
-  }
-
-  function listenFilterChange() {
-    var selectedFilter = getCurrentFilterName();
     imagePreview.className = 'filter-image-preview ' + filterMap[selectedFilter];
-  }
+  });
 };
 
 // function changeAriaStatus(element, aria) {
-//   if (element.getAttribute(aria, false)) {
-//     element.setAttribute(aria, true);
-//   } else {
-//     element.setAttribute(aria, false);
-//   }
+//   var result = element.getAttribute(aria, false);
+//   element.setAttribute(aria, result);
 // }

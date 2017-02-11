@@ -1,10 +1,10 @@
 'use strict';
-window.createScale = function () {
+window.createScale = function (uploadResizeDecBtn, uploadResizeIncBtn, step, currentZoom) {
 
-  var currentZoom = 100;
-  var step = 25;
-  var uploadResizeDecBtn = document.querySelector('.upload-resize-controls-button-dec');
-  var uploadResizeIncBtn = document.querySelector('.upload-resize-controls-button-inc');
+  // currentZoom = 100;
+  // step = 25;
+  // uploadResizeDecBtn = document.querySelector('.upload-resize-controls-button-dec');
+  // uploadResizeIncBtn = document.querySelector('.upload-resize-controls-button-inc');
   var uploadResizeValue = document.querySelector('.upload-resize-controls-value');
   uploadResizeValue.value = currentZoom + ' %';
   var imagePreview = document.querySelector('.filter-image-preview');
@@ -36,3 +36,10 @@ window.createScale = function () {
     imagePreviewZoomTransform();
   }
 };
+
+window.createScale(
+    document.querySelector('.upload-resize-controls-button-dec'),
+    document.querySelector('.upload-resize-controls-button-inc'),
+    25,
+    100
+);
