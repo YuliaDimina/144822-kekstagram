@@ -64,7 +64,12 @@ function changeAriaStatus(element, aria) {
 }
 
 window.initializeFilters();
-window.createScale();
+window.createScale(
+    document.querySelector('.upload-resize-controls-button-dec'),
+    document.querySelector('.upload-resize-controls-button-inc'),
+    25,
+    100
+);
 
 
 // 'use strict';

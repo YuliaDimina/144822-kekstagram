@@ -36,10 +36,3 @@ window.createScale = function (uploadResizeDecBtn, uploadResizeIncBtn, step, cur
     imagePreviewZoomTransform();
   }
 };
-
-window.createScale(
-    document.querySelector('.upload-resize-controls-button-dec'),
-    document.querySelector('.upload-resize-controls-button-inc'),
-    25,
-    100
-);
