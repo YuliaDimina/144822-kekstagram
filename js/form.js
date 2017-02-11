@@ -65,8 +65,7 @@ function changeAriaStatus(element, aria) {
 
 window.initializeFilters();
 window.createScale(
-    document.querySelector('.upload-resize-controls-button-dec'),
-    document.querySelector('.upload-resize-controls-button-inc'),
+    document.querySelector('.upload-resize-controls'),
     25,
     100
 );

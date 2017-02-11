@@ -1,10 +1,10 @@
 'use strict';
-window.createScale = function (uploadResizeDecBtn, uploadResizeIncBtn, step, currentZoom) {
+window.createScale = function (resizeControls, step, currentZoom) {
 
   // currentZoom = 100;
   // step = 25;
-  // uploadResizeDecBtn = document.querySelector('.upload-resize-controls-button-dec');
-  // uploadResizeIncBtn = document.querySelector('.upload-resize-controls-button-inc');
+  var uploadResizeDecBtn = resizeControls.querySelector('.upload-resize-controls-button-dec');
+  var uploadResizeIncBtn = resizeControls.querySelector('.upload-resize-controls-button-inc');
   var uploadResizeValue = document.querySelector('.upload-resize-controls-value');
   uploadResizeValue.value = currentZoom + ' %';
   var imagePreview = document.querySelector('.filter-image-preview');
