@@ -61,9 +61,9 @@ function changeAriaStatus(element, aria) {
 }
 
 window.initializeFilters();
-window.setScale(
+window.createScale(
     document.querySelector('.upload-resize-controls'),
     25,
-    100
+    100,
+    document.querySelector('.filter-image-preview')
 );
-window.createScale();

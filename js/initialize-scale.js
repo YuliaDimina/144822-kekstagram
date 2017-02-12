@@ -1,45 +1,35 @@
 'use strict';
-window.setScale = (function (resizeControls, step, currentZoom) {
+window.createScale = (function () {
 
-  var uploadResizeDecBtn = resizeControls.querySelector('.upload-resize-controls-button-dec');
-  var uploadResizeIncBtn = resizeControls.querySelector('.upload-resize-controls-button-inc');
-  var uploadResizeValue = resizeControls.querySelector('.upload-resize-controls-value');
-  var imagePreview = document.querySelector('.filter-image-preview');
+  return setScale;
 
-  function imagePreviewZoomTransform() {
-    imagePreview.style.transform = ' scale(' + (currentZoom / 100) + ')';
-  }
+  function setScale(resizeControls, step, currentZoom, imagePreview) {
 
-  function showUploadResize() {
-    uploadResizeValue.value = currentZoom + ' %';
-  }
+    var uploadResizeDecBtn = resizeControls.querySelector('.upload-resize-controls-button-dec');
+    var uploadResizeIncBtn = resizeControls.querySelector('.upload-resize-controls-button-inc');
+    var uploadResizeValue = resizeControls.querySelector('.upload-resize-controls-value');
 
-  function listenResizeDecBtn() {
-    if (currentZoom > 25) {
-      currentZoom = currentZoom - step;
-      showUploadResize();
+    uploadResizeDecBtn.addEventListener('click', function () {
+      if (currentZoom > 25) {
+        currentZoom = currentZoom - step;
+        showUploadResize();
+      }
+      imagePreviewZoomTransform();
+    });
+    uploadResizeIncBtn.addEventListener('click', function () {
+      if (currentZoom < 100) {
+        currentZoom = currentZoom + step;
+        showUploadResize();
+      }
+      imagePreviewZoomTransform();
+    });
+
+    function imagePreviewZoomTransform() {
+      imagePreview.style.transform = ' scale(' + (currentZoom / 100) + ')';
     }
-    imagePreviewZoomTransform();
-  }
 
-  function listenResizeIncBtn() {
-    if (currentZoom < 100) {
-      currentZoom = currentZoom + step;
-      showUploadResize();
+    function showUploadResize() {
+      uploadResizeValue.value = currentZoom + ' %';
     }
-    imagePreviewZoomTransform();
   }
-  var createScale = function () {
-    uploadResizeDecBtn.addEventListener('click', listenResizeDecBtn);
-    uploadResizeIncBtn.addEventListener('click', listenResizeIncBtn);
-  };
-  return createScale();
 })();
-
-window.createScale = function () {
-  window.setScale(
-      document.querySelector('.upload-resize-controls'),
-      25,
-      100
-  );
-};
