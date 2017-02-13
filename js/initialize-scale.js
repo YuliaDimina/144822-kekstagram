@@ -1,38 +1,35 @@
 'use strict';
-window.createScale = function (resizeControls, step, currentZoom) {
+window.createScale = (function () {
 
-  // currentZoom = 100;
-  // step = 25;
-  var uploadResizeDecBtn = resizeControls.querySelector('.upload-resize-controls-button-dec');
-  var uploadResizeIncBtn = resizeControls.querySelector('.upload-resize-controls-button-inc');
-  var uploadResizeValue = document.querySelector('.upload-resize-controls-value');
-  uploadResizeValue.value = currentZoom + ' %';
-  var imagePreview = document.querySelector('.filter-image-preview');
+  return setScale;
 
-  uploadResizeDecBtn.addEventListener('click', listenResizeDecBtn);
-  uploadResizeIncBtn.addEventListener('click', listenResizeIncBtn);
+  function setScale(resizeControls, step, currentZoom, imagePreview) {
 
-  function imagePreviewZoomTransform() {
-    imagePreview.style.transform = ' scale(' + (currentZoom / 100) + ')';
-  }
+    var uploadResizeDecBtn = resizeControls.querySelector('.upload-resize-controls-button-dec');
+    var uploadResizeIncBtn = resizeControls.querySelector('.upload-resize-controls-button-inc');
+    var uploadResizeValue = resizeControls.querySelector('.upload-resize-controls-value');
 
-  function showUploadResize() {
-    uploadResizeValue.value = currentZoom + ' %';
-  }
+    uploadResizeDecBtn.addEventListener('click', function () {
+      if (currentZoom > 25) {
+        currentZoom = currentZoom - step;
+        showUploadResize();
+      }
+      imagePreviewZoomTransform();
+    });
+    uploadResizeIncBtn.addEventListener('click', function () {
+      if (currentZoom < 100) {
+        currentZoom = currentZoom + step;
+        showUploadResize();
+      }
+      imagePreviewZoomTransform();
+    });
 
-  function listenResizeDecBtn() {
-    if (currentZoom > 25) {
-      currentZoom = currentZoom - step;
-      showUploadResize();
+    function imagePreviewZoomTransform() {
+      imagePreview.style.transform = ' scale(' + (currentZoom / 100) + ')';
     }
-    imagePreviewZoomTransform();
-  }
 
-  function listenResizeIncBtn() {
-    if (currentZoom < 100) {
-      currentZoom = currentZoom + step;
-      showUploadResize();
+    function showUploadResize() {
+      uploadResizeValue.value = currentZoom + ' %';
     }
-    imagePreviewZoomTransform();
   }
-};
+})();
