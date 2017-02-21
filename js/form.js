@@ -31,7 +31,7 @@ function uploadBoxClose() {
 
 function listenUploadBtn() {
   uploadBoxShow();
-  document.addEventListener('keydown', function (evt) {
+  document.addEventListener('keydown', function(evt) {
     if (evt.keyCode === BUTTON_KEY_CLOSE_BYESCAPE) {
       uploadBoxClose();
     }
@@ -60,33 +60,24 @@ function changeAriaStatus(element, aria) {
   element.setAttribute(aria, result);
 }
 
-window.initializeFilters(function () {
-  var filterMap = {
-    'none': 'filter-none',
-    'chrome': 'filter-chrome',
-    'marvin': 'filter-marvin',
-    'phobos': 'filter-phobos',
-    'sepia': 'filter-sepia',
-    'heat': 'filter-heat'
-  };
+var scaleElement = document.querySelector('.upload-resize-controls');
+var pictureElement = document.querySelector('.filter-image-preview');
+var SCALE_STEP = 25;
+var INITIAL_SCALE = 100;
 
-  var filtersContainer = document.querySelector('.upload-filter-controls');
-  filterForm = document.forms['upload-filter'];
-  var imagePreview = filterForm.querySelector('.filter-image-preview');
-  var setFilters = function () {
-    return filtersContainer.addEventListener('change', function () {
-      var selectedFilter = [].filter.call(filterForm, function (item) {
-        return item.checked;
-      })[0].value;
-      imagePreview.className = 'filter-image-preview ' + filterMap[selectedFilter];
-    });
-  };
-  return setFilters();
-});
+var adjustScale = function (scale) {
+  pictureElement.style.transform = 'scale(' + scale / 100 + ')';
+};
 
-window.createScale(
-    document.querySelector('.upload-resize-controls'),
-    25,
-    100,
-    document.querySelector('.filter-image-preview')
-);
+window.initializeScale(scaleElement, SCALE_STEP, INITIAL_SCALE, adjustScale);
+
+var filterElement = document.forms['upload-filter'];
+
+var applyFilter = function () {
+  var selectedFilter = [].filter.call(filterElement, function (item) {
+    return item.checked;
+  })[0].value;
+  pictureElement.className = 'filter-image-preview ' + window.filterMap[selectedFilter];
+};
+
+window.initializeFilters(filterElement, applyFilter);
