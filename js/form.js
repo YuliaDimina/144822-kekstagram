@@ -31,7 +31,7 @@ function uploadBoxClose() {
 
 function listenUploadBtn() {
   uploadBoxShow();
-  document.addEventListener('keydown', function(evt) {
+  document.addEventListener('keydown', function (evt) {
     if (evt.keyCode === BUTTON_KEY_CLOSE_BYESCAPE) {
       uploadBoxClose();
     }
