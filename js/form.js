@@ -1,5 +1,5 @@
 'use strict';
-
+// window.load('https://intensive-javascript-server-myophkugvq.now.sh/kekstagram/data', onLoad);
 var scaleElement = document.querySelector('.upload-resize-controls');
 var pictureElement = document.querySelector('.filter-image-preview');
 var SCALE_STEP = 25;
