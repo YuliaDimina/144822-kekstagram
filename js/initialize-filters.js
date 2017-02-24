@@ -15,7 +15,8 @@ window.initializeFilters = function (filterElement, callback) {
   });
 };
 
-// function createFilters(ilterElement, applyFilter) {
+
+// function createFilters(ilterElement, collback) {
 //   var filterMap = {
 //     'none': 'filter-none',
 //     'chrome': 'filter-chrome',
