@@ -20,6 +20,8 @@ window.initializeScale(scaleElement, SCALE_STEP, INITIAL_SCALE, adjustScale);
 /**
  * Является callback для window.initializeFilters.
  * Отвечает за определение выбранного фильтра и применение новогого фильтра к элементу.
+ * @param {string} newFilter - новый фильтр.
+ * @param {string} oldFilter - предыдущий фильтр.
 */
 var applyFilter = function (newFilter, oldFilter) {
   window.utils.removeClass(pictureElement, oldFilter);
