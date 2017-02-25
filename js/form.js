@@ -1,4 +1,5 @@
 'use strict';
+
 var scaleElement = document.querySelector('.upload-resize-controls');
 var pictureElement = document.querySelector('.filter-image-preview');
 var SCALE_STEP = 25;
@@ -17,21 +18,13 @@ var adjustScale = function (scale) {
 window.initializeScale(scaleElement, SCALE_STEP, INITIAL_SCALE, adjustScale);
 
 /**
- * Является collback для window.initializeFilters.
+ * Является callback для window.initializeFilters.
  * Отвечает за определение выбранного фильтра и применение новогого фильтра к элементу.
- */
-var applyFilter = function () {
-  /**
-   * Находит определение фильтра в value элемента и добавляет его к классу изменяемого элемента.
-   * @return {value}.
-   */
-  var selectedFilter = [].filter.call(filterElement, function (item) {
-    return item.checked;
-  })[0].value;
-  pictureElement.className = 'filter-image-preview ' + window.filterMap[selectedFilter];
+*/
+var applyFilter = function (newFilter, oldFilter) {
+  window.utils.removeClass(pictureElement, oldFilter);
+  window.utils.addClass(pictureElement, newFilter);
 };
 
 window.initializeFilters(filterElement, applyFilter);
-
-window.utils();
 window.enable();

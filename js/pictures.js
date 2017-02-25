@@ -1,56 +1,23 @@
-
 'use strict';
-// (function () {
-//   var pictureTemplate = document.querySelector('#picture-template');
-//   var picturesElement = pictureTemplate.content.querySelector('.picture');
-//   var picturesContainer = document.querySelector('.pictures');
-//
-//   var openGallery = function(evt) {
-//     evt.preventDefault();
-//     window.showGallery(picture);
-//   }
-//
-//   var loadData = function(event) {
-//     var target = event.target;
-//     var pictures = target.response;
-//     var fragment = document.createDocumentFragment();
-//
-//     pictures.forEach(function (picture) {
-//       var content = picturesElement.cloneNode(true);
-//
-//       content.querySelector('img').src = picture.url;
-//       content.querySelector('.picture-likes').textContent = picture.likes;
-//       content.querySelector('.picture-comments').textContent = picture.comments.length;
-//       content.addEventListener('click', openGallery);
-//
-//       fragment.appendChild(content);
-//
-//       picturesContainer.appendChild(fragment);
-//     });
-//   };
-//
-//   window.load('https://intensive-javascript-server-myophkugvq.now.sh/kekstagram/data', loadData);
-//
-// })();
-
 
 (function () {
+
+  var DATA_URL = 'https://intensive-javascript-server-myophkugvq.now.sh/kekstagram/data';
+
   var pictureTemplate = document.querySelector('#picture-template');
   var picturesElement = pictureTemplate.content.querySelector('.picture');
   var picturesContainer = document.querySelector('.pictures');
   var filters = document.querySelector('.filters');
   var pictures = [];
 
-  window.load('https://intensive-javascript-server-myophkugvq.now.sh/kekstagram/data', onLoad);
+  window.load(DATA_URL, onLoad);
 
   function sortByNew(array) {
     var newArray = array.slice();
     var sorted = [];
-    var getRandomElement = function () {
-      return newArray[Math.floor(Math.random() * newArray.length)];
-    };
+
     while (sorted.length < 10) {
-      var element = getRandomElement();
+      var element = window.utils.getRandomElement(newArray);
       var index = sorted.indexOf(element);
 
       if (index === -1) {
@@ -74,6 +41,7 @@
     var fragment = document.createDocumentFragment();
 
     array.forEach(function (picture) {
+
       var content = picturesElement.cloneNode(true);
 
       content.querySelector('img').src = picture.url;
@@ -96,15 +64,14 @@
 
     drawPictures(pictures);
 
-    filters.classList.remove('hidden');
-
+    window.utils.removeClass(filters, 'hidden');
     filters.addEventListener('click', onSelectFilter);
   }
 
   function onSelectFilter(e) {
     var filterEl = e.target;
 
-    if (!filterEl.classList.contains('filters-radio')) {
+    if (!window.utils.isContainClass(filterEl, 'filters-radio')) {
       return;
     }
 

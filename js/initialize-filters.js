@@ -1,53 +1,42 @@
 'use strict';
 
-/**
- * Отвечает за применение фильтров.
- * @param {element} filterElement - html-элемент, по клику на который применяется фильтр.
- * @param {@callback} callback - функция отслеживает название фильтра в value элемента
- * и применяет фильтр к загруженной картинке.
- */
-window.initializeFilters = function (filterElement, callback) {
-  window.filterMap = {
-    'none': 'filter-none',
-    'chrome': 'filter-chrome',
-    'marvin': 'filter-marvin',
-    'phobos': 'filter-phobos',
-    'sepia': 'filter-sepia',
-    'heat': 'filter-heat'
+window.initializeFilters = (function () {
+
+  var FILTER_CLASS_NAME = 'filter-';
+
+  var _currentFilter = null;
+  var _newFilter = null;
+  var _filterElement = null;
+  var _applyFilterFunc = null;
+
+  function getClassNameByFilterName(filterName) {
+    return FILTER_CLASS_NAME + filterName;
+  }
+
+  function getSelectedFilter() {
+    _currentFilter = [].filter.call(_filterElement, function (item) {
+      return item.checked;
+    })[0].value;
+  }
+
+  function onChangeFilter(evt) {
+    _newFilter = event.target.value;
+
+    var oldClassFilter = getClassNameByFilterName(_newFilter);
+    var newClassFilter = getClassNameByFilterName(_currentFilter);
+
+    _applyFilterFunc(oldClassFilter, newClassFilter);
+
+    _currentFilter = _newFilter;
+  }
+
+  return function (element, filterCallback) {
+    _filterElement = element;
+    _applyFilterFunc = filterCallback;
+
+    getSelectedFilter();
+    element.addEventListener('change', onChangeFilter);
   };
 
-  var filtersContainer = document.querySelector('.upload-filter-controls');
-  filtersContainer.addEventListener('change', function () {
-    callback();
-  });
-};
 
-
-// function createFilters(ilterElement, collback) {
-//   var filterMap = {
-//     'none': 'filter-none',
-//     'chrome': 'filter-chrome',
-//     'marvin': 'filter-marvin',
-//     'phobos': 'filter-phobos',
-//     'sepia': 'filter-sepia',
-//     'heat': 'filter-heat'
-//   };
-//
-//   var filtersContainer = document.querySelector('.upload-filter-controls');
-//   var filterForm = document.forms['upload-filter'];
-//   var imagePreview = filterForm.querySelector('.filter-image-preview');
-//
-//   var setFilters = function () {
-//     return filtersContainer.addEventListener('change', function () {
-//       var selectedFilter = [].filter.call(filterForm, function (item) {
-//         return item.checked;
-//       })[0].value;
-//       imagePreview.className = 'filter-image-preview ' + filterMap[selectedFilter];
-//     });
-//   };
-//   return setFilters;
-// }
-//
-// window.initializeFilters = (function () {
-//   return createFilters;
-// })();
+})();

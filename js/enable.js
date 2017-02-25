@@ -56,7 +56,8 @@ window.enable = function () {
    * Отвечает за скрытие формы загрузки по клику на кнопку Отправить
    */
   function listenFormSubmit() {
-    uploadBox.classList.add('invisible');
+    window.utils.addClass(uploadBox, 'invisible');
+    // uploadBox.classList.add('invisible');
     changeAriaStatus(uploadFormSubmit, 'aria-pressed');
   }
   /**

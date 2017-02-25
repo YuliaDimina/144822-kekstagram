@@ -10,10 +10,6 @@ window.load = (function () {
     xhr.timeout = LOAD_TIMEOUT;
     xhr.responseType = 'json';
     xhr.open('GET', url);
-    xhr.ontimeout = xhr.onerror = function () {
-      // console.log('Timeout error...');
-    };
-
     xhr.send();
   };
 

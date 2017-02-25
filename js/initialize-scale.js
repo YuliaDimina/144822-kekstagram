@@ -3,7 +3,6 @@
 /**
  * Отвечает за трансформацию (масштабирование) элемента.
  */
-
 window.initializeScale = (function () {
 
   var UPLOAD_RESIZE_VALUE = null;
@@ -35,18 +34,7 @@ window.initializeScale = (function () {
     if (operation === 'dec') {
       return Math.max(initialScale - scaleStep, MIN_SCALE);
     }
-    return 25;
-  }
-
-  /**
-   * Функция возвращает True, если у element есть
-   * класс className/
-   * @param {element} element - html-элемент.
-   * @param {string} className - класс, определяющий функцию html-элемента.
-   * @return {boolean} Есть ли у элемента класс.
-   */
-  function isContainClass(element, className) {
-    return element.classList.contains(className);
+    return MIN_SCALE;
   }
 
   /**
@@ -56,11 +44,11 @@ window.initializeScale = (function () {
    * @return {string}.
    */
   function getTypeScaleOperation(element) {
-    if (isContainClass(element, uploadResizeDecBtnClass)) {
+    if (window.utils.isContainClass(element, uploadResizeDecBtnClass)) {
       return 'dec';
     }
 
-    if (isContainClass(element, uploadResizeIncBtnClass)) {
+    if (window.utils.isContainClass(element, uploadResizeIncBtnClass)) {
       return 'inc';
     }
 
@@ -76,7 +64,7 @@ window.initializeScale = (function () {
    */
   function getViewElement() {
     if (UPLOAD_RESIZE_VALUE === null) {
-      UPLOAD_RESIZE_VALUE = document.querySelector(uploadResizeValueClass);
+      UPLOAD_RESIZE_VALUE = scaleElement.querySelector(uploadResizeValueClass);
     }
 
     return UPLOAD_RESIZE_VALUE;
@@ -140,39 +128,8 @@ window.initializeScale = (function () {
     scaleFunction = callback;
 
     scaleElement.addEventListener('click', scaleElementHandle);
+
+    updateResizeValue(initialScale);
   };
 
 })();
-
-
-// function createScale(scaleElement, scaleStep, initialScale, callback) {
-//
-//   var uploadResizeDecBtn = scaleElement.querySelector('.upload-resize-controls-button-dec');
-//   var uploadResizeIncBtn = scaleElement.querySelector('.upload-resize-controls-button-inc');
-//   var uploadResizeValue = scaleElement.querySelector('.upload-resize-controls-value');
-//
-//   uploadResizeDecBtn.addEventListener('click', function () {
-//
-//     if (initialScale > 25) {
-//       initialScale = initialScale - scaleStep;
-//       uploadResizeValue.value = initialScale + ' %';
-//     }
-//
-//     callback(initialScale);
-//   });
-//
-//   uploadResizeIncBtn.addEventListener('click', function () {
-//
-//     if (initialScale < 100) {
-//       initialScale = initialScale + scaleStep;
-//       uploadResizeValue.value = initialScale + ' %';
-//     }
-//
-//     callback(initialScale);
-//   });
-//
-// }
-//
-// window.initializeScale = (function () {
-//   return createScale;
-// })();
