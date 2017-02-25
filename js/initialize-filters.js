@@ -1,4 +1,11 @@
 'use strict';
+
+/**
+ * Отвечает за применение фильтров.
+ * @param {element} filterElement - html-элемент, по клику на который применяется фильтр.
+ * @param {@callback} callback - функция отслеживает название фильтра в value элемента
+ * и применяет фильтр к загруженной картинке.
+ */
 window.initializeFilters = function (filterElement, callback) {
   window.filterMap = {
     'none': 'filter-none',
