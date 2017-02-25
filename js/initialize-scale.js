@@ -1,5 +1,8 @@
 'use strict';
 
+/**
+ * Отвечает за трансформацию (масштабирование) элемента.
+ */
 window.initializeScale = (function () {
 
   var UPLOAD_RESIZE_VALUE = null;
@@ -15,9 +18,14 @@ window.initializeScale = (function () {
   var uploadResizeIncBtnClass = 'upload-resize-controls-button-inc';
   var uploadResizeValueClass = '.upload-resize-controls-value';
 
-  // Возвращает следующее значение масштабирования на основании
-  // текущей операции масштабирования. В зависимости от операции мы проверяем
-  // значение с мин и макс
+  /**
+   * Возвращает следующее значение масштабирования на основании
+   * текущей операции масштабирования. В зависимости от операции мы проверяем
+   * значение с мин и макс.
+   * @param {string} operation - уменьшение или увеличение масштаба.
+   * @param {number} scale - начальное (INITIAL_SCALE в вызове) и текущее значение шкалы масштабирования.
+   * @return {number} Возвращает минимальное значение шкалы масштабирования.
+   */
   function getNextScaleValue(operation, scale) {
     if (operation === 'inc') {
       return Math.min(initialScale + scaleStep, MAX_SCALE);
@@ -26,53 +34,59 @@ window.initializeScale = (function () {
     if (operation === 'dec') {
       return Math.max(initialScale - scaleStep, MIN_SCALE);
     }
-    return 25;
+    return MIN_SCALE;
   }
 
-  // Функция возвращает True, если у element есть
-  // класс className
-  function isContainClass(element, className) {
-    return element.classList.contains(className);
-  }
-
-  // Определяем тип операции + -
-  // К элемент не привязываемся, а смотрим на наличие соответствующего класса
+  /**
+   * Определяем тип операции - увеличение (+) или уменьшение (-)
+   * К элементу не привязываемся, смотрим только на наличие соответствующего класса
+   * @param {element} element - html-элемент.
+   * @return {string}.
+   */
   function getTypeScaleOperation(element) {
-    if (isContainClass(element, uploadResizeDecBtnClass)) {
+    if (window.utils.isContainClass(element, uploadResizeDecBtnClass)) {
       return 'dec';
     }
 
-    if (isContainClass(element, uploadResizeIncBtnClass)) {
+    if (window.utils.isContainClass(element, uploadResizeIncBtnClass)) {
       return 'inc';
     }
 
     return 'unknown';
   }
 
-  // ВОзвращает элемент, на котором мы будем обновлять
-  // значение представления (текущий процесс масштабирования).
-  // Можно было это не городить, но тут мы изобретаем простенький кэш. Если
-  // ссылка на элемент есть в константе, то возвращаем значение константы,
-  // иначе ищем элемент и записываем в константу. На консультации рассмотрим.
+  /**
+   * Возвращает элемент, на котором мы будем обновлять значение представления
+   * (текущий процесс масштабирования).
+   * Псевдокэширование - если ссылка на элемент есть в константе,
+   * то возвращаем значение константы, иначе - ищем элемент и записываем в константу.
+   * @return {string}.
+   */
   function getViewElement() {
     if (UPLOAD_RESIZE_VALUE === null) {
-      UPLOAD_RESIZE_VALUE = document.querySelector(uploadResizeValueClass);
+      UPLOAD_RESIZE_VALUE = scaleElement.querySelector(uploadResizeValueClass);
     }
 
     return UPLOAD_RESIZE_VALUE;
   }
 
-  // Обновляем представление элемента
-  // ЭЛемент, на котором обновлять представление мы берем
-  // из метода getViewElement;
+  /**
+   * Обновляем представление элемента
+   * ЭЛемент, на котором обновлять представление мы берем
+   * из метода getViewElement;
+   * @param {number} scale - начальное (INITIAL_SCALE в вызове) и текущее
+   * значение шкалы масштабирования.
+   */
   function updateResizeValue(scale) {
     var element = getViewElement();
     element.value = scale + ' %';
   }
 
-  // Обработчик события кнопок управления масштабирования
-  // ОТработка задания на всплытие. Нас интересуют только кнопки
-  // + -
+  /**
+   * Обработчик события кнопок управления масштабированием.
+   * Определяем было ли событие: увеличение (+) или уменьшение (-).
+   * @param {event} event - клик на элементах управления масштабом.
+   */
   function scaleElementHandle(event) {
     var eventElement = event.target;
     var operationType = getTypeScaleOperation(eventElement);
@@ -84,8 +98,12 @@ window.initializeScale = (function () {
     setScale(operationType);
   }
 
-  // В этой функции на основании типа операции
-  // мы ставим новое значение для масштабирования.
+  /**
+   * В этой функции на основании типа операции
+   * мы ставим новое значение для масштабирования.
+   * @param {function} operationType - определение события клика: увеличение (+)
+   * или уменьшение (-) масштаба.
+   */
   function setScale(operationType) {
 
     initialScale = getNextScaleValue(operationType, scaleStep);
@@ -94,6 +112,14 @@ window.initializeScale = (function () {
     updateResizeValue(initialScale);
   }
 
+  /**
+   * Отвечает за применение масштабирования по клику на элемент.
+   * @param {element} el - html-элемент, по клику на который применяется фильтр.
+   * @param {number} step - html-элемент, по клику на который применяется фильтр.
+   * @param {number} scale - html-элемент, по клику на который применяется фильтр.
+   * @param {@callback} callback - изменяет css-стиль элемента, применяет
+   * трансформацию масштабирования элемента.
+   */
   return function (el, step, scale, callback) {
 
     scaleElement = el;
@@ -102,39 +128,8 @@ window.initializeScale = (function () {
     scaleFunction = callback;
 
     scaleElement.addEventListener('click', scaleElementHandle);
+
+    updateResizeValue(initialScale);
   };
 
 })();
-
-
-// function createScale(scaleElement, scaleStep, initialScale, callback) {
-//
-//   var uploadResizeDecBtn = scaleElement.querySelector('.upload-resize-controls-button-dec');
-//   var uploadResizeIncBtn = scaleElement.querySelector('.upload-resize-controls-button-inc');
-//   var uploadResizeValue = scaleElement.querySelector('.upload-resize-controls-value');
-//
-//   uploadResizeDecBtn.addEventListener('click', function () {
-//
-//     if (initialScale > 25) {
-//       initialScale = initialScale - scaleStep;
-//       uploadResizeValue.value = initialScale + ' %';
-//     }
-//
-//     callback(initialScale);
-//   });
-//
-//   uploadResizeIncBtn.addEventListener('click', function () {
-//
-//     if (initialScale < 100) {
-//       initialScale = initialScale + scaleStep;
-//       uploadResizeValue.value = initialScale + ' %';
-//     }
-//
-//     callback(initialScale);
-//   });
-//
-// }
-//
-// window.initializeScale = (function () {
-//   return createScale;
-// })();
