@@ -1,5 +1,7 @@
 'use strict';
-
+/**
+ * Функция отвечает за определение и применение css-фильтров к элементам.
+ */
 window.initializeFilters = (function () {
 
   var FILTER_CLASS_NAME = 'filter-';
@@ -12,7 +14,9 @@ window.initializeFilters = (function () {
   function getClassNameByFilterName(filterName) {
     return FILTER_CLASS_NAME + filterName;
   }
-
+  /**
+   * Функция определяет название выбранного фильтра.
+   */
   function getSelectedFilter() {
     _currentFilter = [].filter.call(_filterElement, function (item) {
       return item.checked;
@@ -29,7 +33,12 @@ window.initializeFilters = (function () {
 
     _currentFilter = _newFilter;
   }
-
+  /**
+   * Функция определяет начальный фильтр и по клику меняет его на выбранный.
+   * @param {element} element - html-элемент.
+   * @param {@callback} filterCallback - удаляет предыдущий css-класс фильтра
+   * и добавляет новый css-класс фильтра.
+   */
   return function (element, filterCallback) {
     _filterElement = element;
     _applyFilterFunc = filterCallback;

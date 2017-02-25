@@ -1,7 +1,6 @@
 'use strict';
-
 /**
- * Отвечает за трансформацию (масштабирование) элемента.
+ * Функция отвечает за трансформацию (масштабирование) элемента.
  */
 window.initializeScale = (function () {
 
@@ -54,7 +53,6 @@ window.initializeScale = (function () {
 
     return 'unknown';
   }
-
   /**
    * Возвращает элемент, на котором мы будем обновлять значение представления
    * (текущий процесс масштабирования).
@@ -69,7 +67,6 @@ window.initializeScale = (function () {
 
     return UPLOAD_RESIZE_VALUE;
   }
-
   /**
    * Обновляем представление элемента
    * ЭЛемент, на котором обновлять представление мы берем
@@ -81,7 +78,6 @@ window.initializeScale = (function () {
     var element = getViewElement();
     element.value = scale + ' %';
   }
-
   /**
    * Обработчик события кнопок управления масштабированием.
    * Определяем было ли событие: увеличение (+) или уменьшение (-).
@@ -97,7 +93,6 @@ window.initializeScale = (function () {
 
     setScale(operationType);
   }
-
   /**
    * В этой функции на основании типа операции
    * мы ставим новое значение для масштабирования.
@@ -111,7 +106,6 @@ window.initializeScale = (function () {
     scaleFunction(initialScale);
     updateResizeValue(initialScale);
   }
-
   /**
    * Отвечает за применение масштабирования по клику на элемент.
    * @param {element} el - html-элемент, по клику на который применяется фильтр.

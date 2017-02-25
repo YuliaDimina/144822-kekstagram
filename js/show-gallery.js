@@ -1,6 +1,8 @@
 
 'use strict';
-
+/**
+ * Функция отображает\скрывает отдельный элемент массива (фото из галлереи).
+ */
 window.showGallery = (function () {
   var pictureBox = document.querySelector('.gallery-overlay');
   var closeButton = pictureBox.querySelector('.gallery-overlay-close');

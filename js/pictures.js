@@ -1,5 +1,7 @@
 'use strict';
-
+/**
+ * Функция загружает, отрисовывает и сортирует разными фильтрами массив элементов.
+ */
 (function () {
 
   var DATA_URL = 'https://intensive-javascript-server-myophkugvq.now.sh/kekstagram/data';
@@ -12,6 +14,11 @@
 
   window.load(DATA_URL, onLoad);
 
+  /**
+   * Функция отсортировывает 10 случайных элементов массива.
+   * @param {arrey} array - массив данных
+   * @return {arrey} sorted - массив случайно подобранных 10 элементов.
+   */
   function sortByNew(array) {
     var newArray = array.slice();
     var sorted = [];
@@ -27,7 +34,12 @@
 
     return sorted;
   }
-
+  /**
+   * Функция отсортировывает элементы массива в порядке убывания
+   * величины параметра comments.
+   * @param {arrey} array - массив данных
+   * @return {arrey} sorted - массив элементов отсортированный по убыванию.
+   */
   function sortByDiscussed(array) {
     var sorted = array.slice();
     sorted.sort(function (a, b) {
@@ -36,7 +48,10 @@
 
     return sorted;
   }
-
+  /**
+   * Функция отрисовывает элементы массива в порядке их загрузки на сервер
+   * @param {arrey} array - массив данных
+   */
   function drawPictures(array) {
     var fragment = document.createDocumentFragment();
 
@@ -57,7 +72,11 @@
 
     picturesContainer.appendChild(fragment);
   }
-
+  /**
+   * Функция показывает меню сортировки элементов и
+   * обрабатывает выбор фильтра сортировки.
+   * @param {event} event - событие загрузки.
+   */
   function onLoad(event) {
     var target = event.target;
     pictures = target.response;
