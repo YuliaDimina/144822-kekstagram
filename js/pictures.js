@@ -20,11 +20,10 @@
    * @return {arrey} sorted - массив случайно подобранных 10 элементов.
    */
   function sortByNew(array) {
-    var newArray = array.slice();
     var sorted = [];
 
     while (sorted.length < 10) {
-      var element = window.utils.getRandomElement(newArray);
+      var element = window.utils.getRandomElement(array);
       var index = sorted.indexOf(element);
 
       if (index === -1) {

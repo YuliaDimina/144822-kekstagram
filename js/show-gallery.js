@@ -10,14 +10,28 @@ window.showGallery = (function () {
   var lakes = pictureBox.querySelector('.likes-count');
   var comments = pictureBox.querySelector('.comments-count');
 
-  closeButton.addEventListener('click', closeGallery);
+  closeButton.addEventListener('click', onCloseGallery);
+  // closeButton.addEventListener('keydown', onCloseGalleryByEnter);
 
-  function closeGallery() {
+  function onCloseGalleryByEnter(event) {
+    if (window.utils.isActiveEvent(event)) {
+      onCloseGallery();
+    }
+  }
+
+  function onCloseGalleryByEscape(event) {
+    if (window.utils.isDisactiavateEvent(event)) {
+      onCloseGallery();
+    }
+  }
+
+  function onCloseGallery() {
     pictureBox.classList.add('invisible');
   }
 
   return function (data) {
-    document.addEventListener('keydown', closeGallery);
+    // document.addEventListener('keydown', onCloseGallery);
+    // document.addEventListener('keydown', onCloseGalleryByEscape);
     pictureBox.classList.remove('invisible');
     boxImage.src = data.url;
     lakes.textContent = data.likes;

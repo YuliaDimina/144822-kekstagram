@@ -4,9 +4,9 @@ var SCALE_STEP = 25;
 var INITIAL_SCALE = 100;
 var scaleElement = document.querySelector('.upload-resize-controls');
 var pictureElement = document.querySelector('.filter-image-preview');
-var filterElement = document.forms['upload-filter'];
 var uploadBox = document.querySelector('.upload-overlay');
 var filterForm = document.forms['upload-filter'];
+var filtersBox = document.querySelector('.upload-filter-controls');
 var uploadFormClose = filterForm.querySelector('.upload-form-cancel');
 var uploadFormSubmit = filterForm.querySelector('.upload-form-submit');
 var uploadImageBtn = document.querySelector('.upload-input');
@@ -31,9 +31,14 @@ window.initializeScale(scaleElement, SCALE_STEP, INITIAL_SCALE, adjustScale);
 var applyFilter = function (newFilter, oldFilter) {
   window.utils.removeClass(pictureElement, oldFilter);
   window.utils.addClass(pictureElement, newFilter);
+  filtersBox.addEventListener('keydown', function (evt) {
+    if (window.utils.isActiveEvent) {
+      applyFilter();
+    }
+  });
 };
 
-window.initializeFilters(filterElement, applyFilter);
+window.initializeFilters(filterForm, applyFilter);
 
 uploadImageBtn.addEventListener('change', listenUploadBtn);
 uploadFormClose.addEventListener('click', uploadBoxClose);
@@ -57,15 +62,20 @@ function uploadBoxShow() {
  */
 function uploadBoxClose() {
   window.utils.addClass(uploadBox, 'invisible');
-  changeAriaStatus(uploadFormClose, 'aria-pressed');
+  changeAriaStatus(uploadFormClose);
+  document.addEventListener('keydown', function (evt) {
+    if (window.utils.isDisactiavateEvent) {
+      uploadBoxClose();
+    }
+  });
 }
 /**
  * Отвечает за отображение/скрытие формы загрузки по клавиатурному событию.
  */
 function listenUploadBtn() {
   uploadBoxShow();
-  document.addEventListener('keydown', function (evt) {
-    if (window.utils.isDisactiavateEvent) {
+  uploadFormClose.addEventListener('keydown', function (evt) {
+    if (window.utils.isActiveEvent || window.utils.isDisactiavateEvent) {
       uploadBoxClose();
     }
   });
@@ -75,7 +85,7 @@ function listenUploadBtn() {
  * @param {event} evt - нажатие клавыши Enter
  */
 function listenFormCloseKeydown(evt) {
-  if (window.utils.isActiveEvent) {
+  if (window.utils.isActiveEvent || window.utils.isDisactiavateEvent) {
     uploadBoxClose();
   }
 }
@@ -84,8 +94,7 @@ function listenFormCloseKeydown(evt) {
  */
 function listenFormSubmit() {
   window.utils.addClass(uploadBox, 'invisible');
-  // uploadBox.classList.add('invisible');
-  changeAriaStatus(uploadFormSubmit, 'aria-pressed');
+  changeAriaStatus(uploadFormSubmit);
 }
 /**
  * Отвечает за скрытие формы загрузки по клавиатурному событию во время фокуса
@@ -97,7 +106,12 @@ function listenFormSubmitKeydown(evt) {
     uploadBoxClose();
   }
 }
-function changeAriaStatus(element, aria) {
-  var result = element.getAttribute(aria, false);
-  element.setAttribute(aria, result);
+function changeAriaStatus(element) {
+  // var result = element.getAttribute(aria, false);
+  // element.setAttribute(aria, result);
+  if (element.getAttribute('aria-pressed', false)) {
+    element.setAttribute('aria-pressed', true);
+  } else {
+    element.setAttribute('aria-pressed', false);
+  }
 }
