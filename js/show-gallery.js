@@ -11,7 +11,7 @@ window.showGallery = (function () {
   var comments = pictureBox.querySelector('.comments-count');
 
   closeButton.addEventListener('click', onCloseGallery);
-  // closeButton.addEventListener('keydown', onCloseGalleryByEnter);
+  closeButton.addEventListener('keydown', onCloseGalleryByEnter);
 
   function onCloseGalleryByEnter(event) {
     if (window.utils.isActiveEvent(event)) {
@@ -30,8 +30,8 @@ window.showGallery = (function () {
   }
 
   return function (data) {
-    // document.addEventListener('keydown', onCloseGallery);
-    // document.addEventListener('keydown', onCloseGalleryByEscape);
+    document.addEventListener('keydown', onCloseGallery);
+    document.addEventListener('keydown', onCloseGalleryByEscape);
     pictureBox.classList.remove('invisible');
     boxImage.src = data.url;
     lakes.textContent = data.likes;
