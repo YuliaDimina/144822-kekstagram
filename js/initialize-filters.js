@@ -23,6 +23,12 @@ window.initializeFilters = (function () {
     })[0].value;
   }
 
+  function onEnterClick(evt) {
+    if (window.utils.isActiveEvent(evt)) {
+      onChangeFilter();
+    }
+  }
+
   function onChangeFilter(evt) {
     _newFilter = event.target.value;
 
@@ -45,6 +51,7 @@ window.initializeFilters = (function () {
 
     getSelectedFilter();
     element.addEventListener('change', onChangeFilter);
+    element.addEventListener('keydown', onEnterClick);
   };
 
 

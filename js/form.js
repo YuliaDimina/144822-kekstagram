@@ -6,7 +6,6 @@ var scaleElement = document.querySelector('.upload-resize-controls');
 var pictureElement = document.querySelector('.filter-image-preview');
 var uploadBox = document.querySelector('.upload-overlay');
 var filterForm = document.forms['upload-filter'];
-var filtersBox = document.querySelector('.upload-filter-controls');
 var uploadFormClose = filterForm.querySelector('.upload-form-cancel');
 var uploadFormSubmit = filterForm.querySelector('.upload-form-submit');
 var uploadImageBtn = document.querySelector('.upload-input');
@@ -31,11 +30,6 @@ window.initializeScale(scaleElement, SCALE_STEP, INITIAL_SCALE, adjustScale);
 var applyFilter = function (newFilter, oldFilter) {
   window.utils.removeClass(pictureElement, oldFilter);
   window.utils.addClass(pictureElement, newFilter);
-  filtersBox.addEventListener('keydown', function (evt) {
-    if (window.utils.isActiveEvent) {
-      applyFilter();
-    }
-  });
 };
 
 window.initializeFilters(filterForm, applyFilter);
@@ -64,7 +58,7 @@ function uploadBoxClose() {
   window.utils.addClass(uploadBox, 'invisible');
   changeAriaStatus(uploadFormClose);
   document.addEventListener('keydown', function (evt) {
-    if (window.utils.isDisactiavateEvent) {
+    if (window.utils.isDisactiavateEvent(evt)) {
       uploadBoxClose();
     }
   });
@@ -75,7 +69,7 @@ function uploadBoxClose() {
 function listenUploadBtn() {
   uploadBoxShow();
   uploadFormClose.addEventListener('keydown', function (evt) {
-    if (window.utils.isActiveEvent || window.utils.isDisactiavateEvent) {
+    if (window.utils.isActiveEvent(evt) || window.utils.isDisactiavateEvent(evt)) {
       uploadBoxClose();
     }
   });
@@ -85,7 +79,7 @@ function listenUploadBtn() {
  * @param {event} evt - нажатие клавыши Enter
  */
 function listenFormCloseKeydown(evt) {
-  if (window.utils.isActiveEvent || window.utils.isDisactiavateEvent) {
+  if (window.utils.isActiveEvent(evt) || window.utils.isDisactiavateEvent(evt)) {
     uploadBoxClose();
   }
 }
@@ -102,7 +96,7 @@ function listenFormSubmit() {
  * @param {event} evt - нажатие клавыши Enter
  */
 function listenFormSubmitKeydown(evt) {
-  if (window.utils.isActiveEvent) {
+  if (window.utils.isActiveEvent('keydown')) {
     uploadBoxClose();
   }
 }
