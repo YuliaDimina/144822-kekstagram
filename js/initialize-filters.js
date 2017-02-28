@@ -14,6 +14,19 @@ window.initializeFilters = (function () {
   function getClassNameByFilterName(filterName) {
     return FILTER_CLASS_NAME + filterName;
   }
+
+  function setFilters(filterName) {
+
+    _newFilter = filterName;
+
+    var oldClassFilter = getClassNameByFilterName(_newFilter);
+    var newClassFilter = getClassNameByFilterName(_currentFilter);
+
+    _applyFilterFunc(oldClassFilter, newClassFilter);
+
+    _currentFilter = _newFilter;
+  }
+
   /**
    * Функция определяет название выбранного фильтра.
    */
@@ -25,20 +38,23 @@ window.initializeFilters = (function () {
 
   function onEnterClick(evt) {
     if (window.utils.isActiveEvent(evt)) {
-      onChangeFilter();
+      var target = evt.target;
+
+      if (!window.utils.isContainClass(target, 'upload-filter-preview')) {
+        return;
+      }
+
+      var newFilterName = target.parentNode.previousElementSibling.value;
+
+      setFilters(newFilterName);
     }
   }
 
   function onChangeFilter(evt) {
-    _newFilter = event.target.value;
-
-    var oldClassFilter = getClassNameByFilterName(_newFilter);
-    var newClassFilter = getClassNameByFilterName(_currentFilter);
-
-    _applyFilterFunc(oldClassFilter, newClassFilter);
-
-    _currentFilter = _newFilter;
+    setFilters(evt.target.value);
   }
+
+
   /**
    * Функция определяет начальный фильтр и по клику меняет его на выбранный.
    * @param {element} element - html-элемент.

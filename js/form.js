@@ -101,8 +101,6 @@ function listenFormSubmitKeydown(evt) {
   }
 }
 function changeAriaStatus(element) {
-  // var result = element.getAttribute(aria, false);
-  // element.setAttribute(aria, result);
   if (element.getAttribute('aria-pressed', false)) {
     element.setAttribute('aria-pressed', true);
   } else {
