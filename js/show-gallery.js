@@ -13,14 +13,14 @@ window.showGallery = (function () {
   closeButton.addEventListener('click', onCloseGallery);
   closeButton.addEventListener('keydown', onCloseGalleryByEnter);
 
-  function onCloseGalleryByEnter(event) {
-    if (window.utils.isActiveEvent(event)) {
+  function onCloseGalleryByEnter(evt) {
+    if (window.utils.isActiveEvent(evt)) {
       onCloseGallery();
     }
   }
 
-  function onCloseGalleryByEscape(event) {
-    if (window.utils.isDisactiavateEvent(event)) {
+  function onCloseGalleryByEscape(evt) {
+    if (window.utils.isDisactiavateEvent(evt)) {
       onCloseGallery();
     }
   }
@@ -30,8 +30,8 @@ window.showGallery = (function () {
   }
 
   return function (data) {
-    document.addEventListener('keydown', onCloseGallery);
     document.addEventListener('keydown', onCloseGalleryByEscape);
+    document.addEventListener('keydown', onCloseGalleryByEnter);
     pictureBox.classList.remove('invisible');
     boxImage.src = data.url;
     lakes.textContent = data.likes;

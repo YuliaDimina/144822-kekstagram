@@ -39,13 +39,18 @@ uploadFormClose.addEventListener('click', uploadBoxClose);
 uploadFormClose.addEventListener('keydown', listenFormCloseKeydown);
 uploadFormSubmit.addEventListener('click', listenFormSubmit);
 uploadFormSubmit.addEventListener('keydown', listenFormSubmitKeydown);
+document.addEventListener('keydown', function (evt) {
+  if (window.utils.isDisactiavateEvent(evt)) {
+    uploadBoxClose();
+  }
+});
 
 /**
  * Отвечает за отображение формы загрузки и смену атрибута aria.
  */
 function uploadBoxShow() {
   window.utils.removeClass(uploadBox, 'invisible');
-  if (uploadBox.getAttribute('aria-hidden', true)) {
+  if (uploadBox.getAttribute('aria-hidden')) {
     uploadBox.setAttribute('aria-hidden', false);
   } else {
     uploadBox.setAttribute('aria-hidden', true);
@@ -57,11 +62,6 @@ function uploadBoxShow() {
 function uploadBoxClose() {
   window.utils.addClass(uploadBox, 'invisible');
   changeAriaStatus(uploadFormClose);
-  document.addEventListener('keydown', function (evt) {
-    if (window.utils.isDisactiavateEvent(evt)) {
-      uploadBoxClose();
-    }
-  });
 }
 /**
  * Отвечает за отображение/скрытие формы загрузки по клавиатурному событию.
@@ -96,12 +96,12 @@ function listenFormSubmit() {
  * @param {event} evt - нажатие клавыши Enter
  */
 function listenFormSubmitKeydown(evt) {
-  if (window.utils.isActiveEvent('keydown')) {
+  if (window.utils.isActiveEvent(evt)) {
     uploadBoxClose();
   }
 }
 function changeAriaStatus(element) {
-  if (element.getAttribute('aria-pressed', false)) {
+  if (element.getAttribute('aria-pressed')) {
     element.setAttribute('aria-pressed', true);
   } else {
     element.setAttribute('aria-pressed', false);
